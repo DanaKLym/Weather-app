@@ -1,0 +1,113 @@
+body {
+    background: linear-gradient(324deg, rgba(169, 33, 222, 1) 14%, rgba(255, 218, 27, 1) 63%, rgba(255, 255, 255, 1) 100%);
+    background: url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/038/870/original/backgroundHill.jpg?1656363173");
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: 100%;
+    
+}
+
+.container {
+    text-align: center;
+    margin: 30px auto;
+    padding: 30px;
+    max-width: 600px;
+    
+    background: #d7aef3;
+    color: #fff;
+    
+    box-shadow: 8px 8px #891180, 16px 16px #6e0c66, 24px 24px #460540, 0px 0px 150px #ffff00;
+    border-radius: 3px;     
+}
+
+form.search {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.btn {
+    background: linear-gradient(68.6deg, rgb(252, 165, 241) 1.8%, rgb(181, 255, 255) 100.5%);
+    border: 4px ridge #fca5f1;
+    border-radius: 1px;
+    color:black;
+    font-family: 'Press Start 2P', cursive;    
+}
+
+.btn:hover {
+    color: #891180;
+    border: 4px ridge #ffffff;
+    border-radius: 1px;
+}
+
+section.mainWeather {
+    margin: 20px;
+    text-align: start;
+}
+
+section h1.mainCity {
+    text-transform: capitalize;
+    color: #ff2fd2;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 34px;
+    text-shadow: #460540 2px 2px;
+}
+
+section h2.degrees {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+    text-shadow: #460540 2px 2px;
+}
+
+section p span.dateTime {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+section p #description {
+    font-family: 'Josefin Sans', sans-serif;
+    text-transform: capitalize;
+}
+
+
+.mainImage {
+    display: block;
+    width: 80px;   
+}
+
+section span.temType {
+    font-size: 12px;
+    cursor: pointer;
+    
+}
+
+section a {
+    text-decoration: none;
+    color:#fff;
+
+}
+
+section a#celcius:hover {
+    color: #beeafc;
+    font-size: 16px;
+    transition: all 60ms ease;
+}
+
+section a#fahrenheit:hover {
+    color: #beeafc;
+        font-size: 16px;
+        transition: all 60ms ease;
+}
+
+/*section span.precipitation,*/ section span.humidity, section span.wind {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+section.lowerWeather {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+
