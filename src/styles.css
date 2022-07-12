@@ -106,8 +106,30 @@ section.lowerWeather {
     font-family: 'Josefin Sans', sans-serif;
 }
 
-.bold {
+div span.boldTemperatureDigits {
     font-weight: 700;
 }
 
+footer, a.githubLink {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 15px;
+    opacity: 0.8;
+}
+
+footer a.githubLink {
+    text-decoration: none;
+    color: #03105a;
+    text-shadow: 2px 2px 3px #fff;
+}
+
+footer a.githubLink:hover {
+    color: #03105a ;
+    text-shadow: 2px 2px 3px rgb(176, 9, 209);
+}
+
+footer a.githubLink:active {
+    color:  #fff;
+    text-shadow: 2px 2px 5px #03105a;
+    text-decoration: none;
+}
 
