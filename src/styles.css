@@ -26,18 +26,29 @@ form.search {
     line-height: 1.5;
 }
 
+input.search-input {
+    border-radius: 5px;
+    box-shadow: 2px 2px #460540;
+}
+
 .btn {
     background: linear-gradient(68.6deg, rgb(252, 165, 241) 1.8%, rgb(181, 255, 255) 100.5%);
     border: 4px ridge #fca5f1;
-    border-radius: 1px;
-    color:black;
-    font-family: 'Press Start 2P', cursive;    
+    border-radius: 5px;
+    box-shadow: 2px 2px #a13b94;
+    color:#460540;
+    font-family: 'Press Start 2P', cursive;
+    margin: 5px;
 }
 
 .btn:hover {
     color: #891180;
     border: 4px ridge #ffffff;
-    border-radius: 1px;
+    border-radius: 5px;
+}
+
+.btn:active {
+    transform: scale(0.95);
 }
 
 section.mainWeather {
@@ -65,9 +76,12 @@ section p span.dateTime {
 
 section p #description {
     font-family: 'Josefin Sans', sans-serif;
-    text-transform: capitalize;
+    display: block;
 }
 
+section p #description:first-letter {
+    text-transform: uppercase;
+}
 
 .mainImage {
     display: block;
