@@ -27,8 +27,8 @@ function displayWeather(response) {
   document.querySelector("#description").innerHTML = response.data.weather[0].description;
  
   let mainIconEl = document.querySelector("#mainImageElement");
-  
-  mainIconEl.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+  let mainIconElValue = response.data.weather[0].icon;
+  mainIconEl.setAttribute("src", `http://openweathermap.org/img/wn/${mainIconElValue}@2x.png`)
 
 }
 
