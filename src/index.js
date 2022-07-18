@@ -29,42 +29,7 @@ function displayWeather(response) {
   let mainIconEl = document.querySelector("#mainImageElement");
   let mainIconElAPI = response.data.weather[0].icon;
   
-  if (mainIconElAPI === "01d") {
-    mainIconEl.setAttribute("src", `../media/01d.png`);
-  } else if (mainIconElAPI === "02d") {
-    mainIconEl.setAttribute("src", `../media/02d.png`);
-  } else if (mainIconElAPI === "03d") {
-    mainIconEl.setAttribute("src", `../media/03d.png`);
-  } else if (mainIconElAPI === "04d") {
-    mainIconEl.setAttribute("src", `../media/04d.png`);
-  } else if (mainIconElAPI === "09d") {
-    mainIconEl.setAttribute("src", `../media/09d.png`);
-  } else if (mainIconElAPI === "10d") {
-    mainIconEl.setAttribute("src", `../media/10d.png`);
-  } else if (mainIconElAPI === "13d") {
-    mainIconEl.setAttribute("src", `../media/13d.png`);
-  } else if (mainIconElAPI === "50d") {
-    mainIconEl.setAttribute("src", `../media/50d.png`);
-  } else if (mainIconElAPI === "01n") {
-    mainIconEl.setAttribute("src", `../media/01n.png`);
-  } else if (mainIconElAPI === "02n") {
-    mainIconEl.setAttribute("src", `../media/02n.png`);
-  } else if (mainIconElAPI === "03n") {
-    mainIconEl.setAttribute("src", `../media/03n.png`);
-  } else if (mainIconElAPI === "04n") {
-    mainIconEl.setAttribute("src", `../media/04n.png`);
-  } else if (mainIconElAPI === "09n") {
-    mainIconEl.setAttribute("src", `../media/09n.png`);
-  } else if (mainIconElAPI === "10n") {
-    mainIconEl.setAttribute("src", `../media/10n.png`);
-  } else if (mainIconElAPI === "11n") {
-    mainIconEl.setAttribute("src", `../media/11n.png`);
-  } else if (mainIconElAPI === "13n") {
-    mainIconEl.setAttribute("src", `../media/13n.png`);
-  } else if (mainIconElAPI === "50n") {
-    mainIconEl.setAttribute("src", `../media/50n.png`);
-  } else {mainIconEl.setAttribute("src", `http://openweathermap.org/img/wn/${mainIconElAPI}@2x.png`)};
-
+  mainIconEl.setAttribute("src", `../media/${mainIconElAPI}.png`);
 }
 
 function setDefaultCity(searchCity) { 
