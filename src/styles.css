@@ -49,6 +49,8 @@ input.search-input {
 
 .btn:active {
     transform: scale(0.95);
+    border: 4px groove #ffffff;
+    transition: all 150ms ease-in-out;
 }
 
 section.mainWeather {
@@ -60,7 +62,7 @@ section h1.mainCity {
     text-transform: capitalize;
     color: #ff2fd2;
     font-family: 'Press Start 2P', cursive;
-    font-size: 34px;
+    font-size: 40px;
     text-shadow: #460540 2px 2px;
 }
 
@@ -68,6 +70,10 @@ section h2.degrees {
     font-family: 'Press Start 2P', cursive;
     font-size: 20px;
     text-shadow: #460540 2px 2px;
+}
+
+section span.mainDegrees {
+    font-size: 26px;
 }
 
 section p span.dateTime {
@@ -94,22 +100,26 @@ section span.temType {
     
 }
 
-section a {
+h2 .active {
+    cursor: default;
     text-decoration: none;
-    color:#fff;
-
+    color: #fff;
 }
 
-section a#celcius:hover {
-    color: #beeafc;
+h2 .active:hover {
+ text-decoration: none;
+ cursor: text;
+}
+
+a.to-be-chosen {
+    text-decoration: none;
+    color: #cee7eb;
+}
+
+a.to-be-chosen:hover {
+    color: #c0ebfc;
     font-size: 16px;
-    transition: all 60ms ease;
-}
-
-section a#fahrenheit:hover {
-    color: #beeafc;
-        font-size: 16px;
-        transition: all 60ms ease;
+    transition: all 200ms ease-in-out;
 }
 
 /*section span.precipitation,*/ section span.humidity, section span.wind {

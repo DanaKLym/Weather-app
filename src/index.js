@@ -18,13 +18,13 @@ let dateTime = document.querySelector(".dateTime");
 dateTime.innerHTML = setDateTime();
 
 function displayWeather(response) { 
-  console.log(response);
-  
-  document.querySelector(".mainCity").innerHTML = response.data.name;
+    document.querySelector(".mainCity").innerHTML = response.data.name;
   document.querySelector(".mainDegrees").innerHTML = Math.round(response.data.main.temp);
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
   document.querySelector("#description").innerHTML = response.data.weather[0].description;
+
+  initialCelcius = Math.round(response.data.main.temp);
  
   let mainIconEl = document.querySelector("#mainImageElement");
   let mainIconElAPI = response.data.weather[0].icon;
@@ -101,23 +101,32 @@ locationButton.addEventListener("click", revealLocation);
 
 setDefaultCity("Kyiv");
 
-function convertFahrenheit() {
-  let fahrenheitTemperature = Math.round((mainTemperature.textContent * 9 / 5) + 32);
+function convertFahrenheit(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = Math.round(initialCelcius * 9 / 5) + 32;
+  mainTemperature.innerHTML = fahrenheitTemperature;
+  
+  fahrenheitSymbol.classList.add("active");
+  celciusSymbol.classList.remove("active");
+  fahrenheitSymbol.classList.remove("to-be-chosen");
+  celciusSymbol.classList.add("to-be-chosen");
+}
 
-  return (mainTemperature.innerHTML = fahrenheitTemperature);
+function convertCelcius(event) {
+  event.preventDefault();
+  mainTemperature.innerHTML = initialCelcius;
 
+  celciusSymbol.classList.add("active");
+  fahrenheitSymbol.classList.remove("active");
+  celciusSymbol.classList.remove("to-be-chosen");
+  fahrenheitSymbol.classList.add("to-be-chosen");
 }
 
 let mainTemperature = document.querySelector("span.mainDegrees");
-let fahrenheitSymbol = document.querySelector("a#fahrenheit");
+let fahrenheitSymbol = document.querySelector("#fahrenheit");
 fahrenheitSymbol.addEventListener("click", convertFahrenheit);
 
-
-function convertCelcius() {
-  let celciusTemperature = Math.round((mainTemperature.textContent - 32) * 5 / 9);
-  return (mainTemperature.innerHTML = celciusTemperature);
-}
-
-
-let celciusSymbol = document.querySelector("a#celcius");
+let celciusSymbol = document.querySelector("#celcius");
 celciusSymbol.addEventListener("click", convertCelcius);
+
+let initialCelcius = null;
