@@ -31,25 +31,27 @@ input.search-input {
     box-shadow: 2px 2px #460540;
 }
 
-.btn {
+.upperBtn {
     background: linear-gradient(68.6deg, rgb(252, 165, 241) 1.8%, rgb(181, 255, 255) 100.5%);
-    border: 4px ridge #fca5f1;
-    border-radius: 5px;
+    border: 2px outset #dcb5ff;
+    border-radius: 3px;
     box-shadow: 2px 2px #a13b94;
-    color:#460540;
+    color:rgba(70, 5, 64, 0.85);
     font-family: 'Press Start 2P', cursive;
     margin: 5px;
+    padding: 6px 12px;
+    font-size: 16px;
 }
 
-.btn:hover {
+.upperBtn:hover {
     color: #891180;
-    border: 4px ridge #ffffff;
+    border: 2px outset #d59bf6;
     border-radius: 5px;
 }
 
-.btn:active {
-    transform: scale(0.95);
-    border: 4px groove #ffffff;
+.upperBtn:active {
+    transform: scale(0.9);
+    border: 2px outset #d59bf6;
     transition: all 150ms ease-in-out;
 }
 
