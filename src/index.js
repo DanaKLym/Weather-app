@@ -17,6 +17,14 @@ function setDateTime() {
 let dateTime = document.querySelector(".dateTime");
 dateTime.innerHTML = setDateTime();
 
+function displayForescast() { 
+  let forecastElement = document.querySelector("#forecast");
+ 
+  forecastElement.innerHTML = "hiyo, ladies"
+}
+
+displayForescast();
+
 function displayWeather(response) { 
     document.querySelector(".mainCity").innerHTML = response.data.name;
   document.querySelector(".mainDegrees").innerHTML = Math.round(response.data.main.temp);
