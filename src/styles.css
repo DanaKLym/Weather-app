@@ -9,15 +9,17 @@ body {
 
 .container {
     text-align: center;
-    margin: 30px auto;
+    margin: 3px auto;
     padding: 30px;
     max-width: 600px;
     
     background: #d7aef3;
     color: #fff;
     
-    box-shadow: 8px 8px #891180, 16px 16px #6e0c66, 24px 24px #460540, 0px 0px 150px #ffff00;
     border-radius: 3px;     
+    box-shadow: 8px 8px #891180,
+        16px 16px #6e0c66,
+        24px 24px #460540;
 }
 
 form.search {
@@ -130,6 +132,20 @@ a.to-be-chosen:hover {
 
 section.lowerWeather {
     font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+    font-size: 16px;
+}
+
+section div.forecastWeekDays {
+    opacity: 0.7;
+}
+
+section div.forecastImage {
+    margin: 8px;
+}
+
+section div.temperatureDigits {
+    font-weight: 300;
 }
 
 div span.boldTemperatureDigits {
