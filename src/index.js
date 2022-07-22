@@ -14,10 +14,10 @@ function setDateTime() {
   return (`${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}, ${hours}:${minutes}`);
 }
 
-let dateTime = document.querySelector(".dateTime");
-dateTime.innerHTML = setDateTime();
 
-function displayForescast() {
+function displayForescast(response) {
+  console.log(response.data.daily);
+
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
   let forecastDays = ["Fri", "Sat", "Sun", "Mon", "Tue"];
@@ -43,7 +43,13 @@ function displayForescast() {
 
 }
 
-displayForescast();
+function getForecast(coordinates) {
+  let apiKey = "39211d1d13139f85371fa9af1af3fc63";
+  let forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lat}&appid=${apiKey}&units=metric`;
+  
+  console.log(forecastUrl);
+  axios.get(forecastUrl).then(displayForescast);
+}
 
 function displayWeather(response) {
   document.querySelector(".mainCity").innerHTML = response.data.name;
@@ -58,6 +64,9 @@ function displayWeather(response) {
   let mainIconElAPI = response.data.weather[0].icon;
 
   mainIconEl.setAttribute("src", `../media/${mainIconElAPI}.png`);
+
+  getForecast(response.data.coord);
+  
 }
 
 function setDefaultCity(searchCity) {
@@ -86,13 +95,6 @@ function revealLocation(event) {
   navigator.geolocation.getCurrentPosition(searchCurrentPosition);
 }
 
-let city = document.querySelector(".search");
-city.addEventListener("submit", setCity);
-
-let locationButton = document.querySelector("#location-button");
-locationButton.addEventListener("click", revealLocation);
-
-setDefaultCity("Kyiv");
 
 function convertFahrenheit(event) {
   event.preventDefault();
@@ -115,6 +117,15 @@ function convertCelcius(event) {
   fahrenheitSymbol.classList.add("to-be-chosen");
 }
 
+let dateTime = document.querySelector(".dateTime");
+dateTime.innerHTML = setDateTime();
+  
+let city = document.querySelector(".search");
+city.addEventListener("submit", setCity);
+  
+let locationButton = document.querySelector("#location-button");
+locationButton.addEventListener("click", revealLocation);  
+
 let mainTemperature = document.querySelector("span.mainDegrees");
 let fahrenheitSymbol = document.querySelector("#fahrenheit");
 fahrenheitSymbol.addEventListener("click", convertFahrenheit);
@@ -123,3 +134,5 @@ let celciusSymbol = document.querySelector("#celcius");
 celciusSymbol.addEventListener("click", convertCelcius);
 
 let initialCelcius = null;
+
+setDefaultCity("Kyiv");
