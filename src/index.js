@@ -23,8 +23,7 @@ function setForecastDays(timestamp) {
 }
 
 function displayForescast(response) {
-  console.log(response.data.daily);
-  
+    
   let forecastInfo = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
@@ -42,7 +41,7 @@ function displayForescast(response) {
               />
             </div>
             <div class="temperatureDigits">
-              <span class="boldTemperatureDigits">${Math.round(day.temp.max)}°C</span>/${Math.round(day.temp.min)}°C
+              <span class="boldTemperatureDigits tempValue">${Math.round(day.temp.max)}</span>°/<span class="tempValue">${Math.round(day.temp.min)}</span>°
             </div>
           </div>`;
   }
@@ -57,7 +56,6 @@ function getForecast(coordinates) {
   let apiKey = "39211d1d13139f85371fa9af1af3fc63";
   let forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lat}&appid=${apiKey}&units=metric`;
   
-  console.log(forecastUrl);
   axios.get(forecastUrl).then(displayForescast);
 }
 
