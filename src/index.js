@@ -79,10 +79,18 @@ function displayWeather(response) {
   
 }
 
+function error() { 
+  let searchCity = document.querySelector("#city-search").value;
+  if (error) { 
+    alert(`🤖 Wow, seems like evil bots are trying to interfere 🫣
+Check the spelling of "${searchCity.charAt(0).toUpperCase() + searchCity.slice(1)}" and type it one more time`)
+  }
+}
+
 function setDefaultCity(searchCity) {
   let apiKey = "39211d1d13139f85371fa9af1af3fc63";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWeather);
+  axios.get(apiUrl).then(displayWeather).catch(error);
 }
 
 function setCity(event) {
@@ -90,7 +98,7 @@ function setCity(event) {
   let searchCity = document.querySelector("#city-search").value;
 
   if (searchCity.length <= 0) {
-    alert("👾 Oops, looks like aliens are messing up with us again, try to type the city name again");
+    alert(`👾 Oops, looks like aliens are messing up with you, please, type the city name again`);
   } else { 
   setDefaultCity(searchCity)};
 }
@@ -100,7 +108,7 @@ function searchCurrentPosition(position) {
   let lon = position.coords.longitude;
   let apiKey = "39211d1d13139f85371fa9af1af3fc63";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
-  console.log(apiUrl);
+ 
   axios.get(apiUrl).then(displayWeather);
 }
 
