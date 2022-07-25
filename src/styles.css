@@ -1,15 +1,14 @@
 body {
     background: linear-gradient(324deg, rgba(169, 33, 222, 1) 14%, rgba(255, 218, 27, 1) 63%, rgba(255, 255, 255, 1) 100%);
     background: url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/038/870/original/backgroundHill.jpg?1656363173");
-    background-position: center center;
     background-attachment: fixed;
-    background-size: 100%;
+    background-size: cover;
     
 }
 
 .container {
     text-align: center;
-    margin: 3px auto;
+    margin: 10px auto;
     padding: 30px;
     max-width: 600px;
     
