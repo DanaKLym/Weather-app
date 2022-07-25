@@ -14,28 +14,38 @@ function setDateTime() {
   return (`${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}, ${hours}:${minutes}`);
 }
 
+function setForecastDays(timestamp) {
+  let forecastDate = new Date(timestamp * 1000);
+  let day = forecastDate.getDay();
+  let forecastDays = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+
+  return forecastDays[day];
+}
 
 function displayForescast(response) {
   console.log(response.data.daily);
-
+  
+  let forecastInfo = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  let forecastDays = ["Fri", "Sat", "Sun", "Mon", "Tue"];
-  forecastDays.forEach(function (day) { 
+ 
+  forecastInfo.forEach(function (day, index) { 
+    if (index < 5) {
   forecastHTML = forecastHTML + `<div class="col">
-            <div class="forecastWeekDays">${day}</div>
+            <div class="forecastWeekDays">${setForecastDays(day.dt)}</div>
             <div class="forecastImage">
               <img
-                src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/038/875/original/sun_and_clouds.png?1656363338"
+                src="media/${day.weather[0].icon}.png"
                 alt="sun and clouds"
                 width="50px"
                 id="firstLowerWeatherIcon"
               />
             </div>
             <div class="temperatureDigits">
-              <span class="boldTemperatureDigits">23°C</span>/19°C
+              <span class="boldTemperatureDigits">${Math.round(day.temp.max)}°C</span>/${Math.round(day.temp.min)}°C
             </div>
           </div>`;
+  }
   })
   
   forecastHTML = forecastHTML + `</div>`;
