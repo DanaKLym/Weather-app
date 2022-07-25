@@ -88,7 +88,11 @@ function setDefaultCity(searchCity) {
 function setCity(event) {
   event.preventDefault();
   let searchCity = document.querySelector("#city-search").value;
-  setDefaultCity(searchCity);
+
+  if (searchCity.length <= 0) {
+    alert("👾 Oops, looks like aliens are messing up with us again, try to type the city name again");
+  } else { 
+  setDefaultCity(searchCity)};
 }
 
 function searchCurrentPosition(position) {
