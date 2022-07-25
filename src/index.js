@@ -109,7 +109,6 @@ function revealLocation(event) {
   navigator.geolocation.getCurrentPosition(searchCurrentPosition);
 }
 
-
 function convertFahrenheit(event) {
   event.preventDefault();
   let fahrenheitTemperature = Math.round(initialCelcius * 9 / 5) + 32;
