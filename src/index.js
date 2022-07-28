@@ -11,8 +11,10 @@ locationButton.addEventListener("click", revealLocation);
 let units = "metric";
 let coords = null;
 let initialCelcius = null;
+let initialWindSpeed = null;
 
 let mainTemperature = document.querySelector("span.mainDegrees");
+let windSpeedConversion = document.querySelector("#wind-conversion")
 let fahrenheitSymbol = document.querySelector("#fahrenheit");
 fahrenheitSymbol.addEventListener("click", convertFahrenheit);
 
@@ -90,11 +92,11 @@ function displayWeather(response) {
   document.querySelector(".mainCity").innerHTML = response.data.name;
   document.querySelector(".mainDegrees").innerHTML = Math.round(response.data.main.temp);
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-  document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
+  initialWindSpeed = Math.round(response.data.wind.speed);
+  document.querySelector("#wind").innerHTML = initialWindSpeed;
   document.querySelector("#description").innerHTML = response.data.weather[0].description;
 
   initialCelcius = Math.round(response.data.main.temp);
-
   let mainIconEl = document.querySelector("#mainImageElement");
   let mainIconElAPI = response.data.weather[0].icon;
 
@@ -153,6 +155,8 @@ function convertFahrenheit(event) {
 
   let fahrenheitTemperature = Math.round(initialCelcius * 9 / 5) + 32;
   mainTemperature.innerHTML = fahrenheitTemperature;
+  let windSpeedtoFahr = Math.round(initialWindSpeed * 2.237);
+  windSpeedConversion.innerHTML = `${windSpeedtoFahr} mph`;
 
   fahrenheitSymbol.classList.add("active");
   celciusSymbol.classList.remove("active");
@@ -165,6 +169,7 @@ function convertFahrenheit(event) {
 function convertCelcius(event) {
   event.preventDefault();
   mainTemperature.innerHTML = initialCelcius;
+  windSpeedConversion.innerHTML = `${initialWindSpeed} m/s`;
 
   celciusSymbol.classList.add("active");
   fahrenheitSymbol.classList.remove("active");
