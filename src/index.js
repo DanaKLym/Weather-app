@@ -1,3 +1,25 @@
+// Global variables
+let dateTime = document.querySelector(".dateTime");
+dateTime.innerHTML = setDateTime();
+
+let city = document.querySelector(".search");
+city.addEventListener("submit", setCity);
+
+let locationButton = document.querySelector("#location-button");
+locationButton.addEventListener("click", revealLocation);
+
+let units = "metric";
+let coords = null;
+let initialCelcius = null;
+
+let mainTemperature = document.querySelector("span.mainDegrees");
+let fahrenheitSymbol = document.querySelector("#fahrenheit");
+fahrenheitSymbol.addEventListener("click", convertFahrenheit);
+
+let celciusSymbol = document.querySelector("#celcius");
+celciusSymbol.addEventListener("click", convertCelcius);
+
+// sets current date and time from the user's device;
 function setDateTime() {
   let date = new Date();
   let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -14,6 +36,7 @@ function setDateTime() {
   return (`${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}, ${hours}:${minutes}`);
 }
 
+// sets the short form of days on forecast table instead of numerical type
 function setForecastDays(timestamp) {
   let forecastDate = new Date(timestamp * 1000);
   let day = forecastDate.getDay();
@@ -22,22 +45,15 @@ function setForecastDays(timestamp) {
   return forecastDays[day];
 }
 
-function getFahrenheit(result) { 
-  initalMax = result.temp.max;
-  initialMin = result.temp.min;
-
-  let forecastMax = document.querySelector(".tempValueMax");
-  let forecastMin = document.querySelector(".tempValueMin");
-
-  forecastMax.innerHTML = Math.round((initialMax[0] * 9 / 5) + 32);
-}
-
+// displays dynamic forecast info for 5 days using API daily info
 function displayForescast(response) {
 
   let forecastInfo = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  console.log(forecastInfo);
+  initialMin = Math.round(response.data.daily[0].temp.min);
+  initialMax = Math.round(response.data.daily[0].temp.max)
+  
   forecastInfo.forEach(function (day, index) {
     if (index < 5) {
       forecastHTML = forecastHTML + `<div class="col">
@@ -51,7 +67,7 @@ function displayForescast(response) {
               />
             </div>
             <div class="temperatureDigits">
-              <span class="boldTemperatureDigits tempValueMax">${Math.round(day.temp.max)}</span>°/<span class="tempValueMin">${Math.round(day.temp.min)}</span>°
+              <span class="boldTemperatureDigits tempValueMax">${initialMax}</span>°/<span class="tempValueMin">${initialMin}</span>°
             </div>
           </div>`;
     }
@@ -61,14 +77,15 @@ function displayForescast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
-function getForecast(coordinates) {
+// gets the city by calling for it with longitude and latitude info from API
+function getForecast(coordinates, units) {
   let apiKey = "39211d1d13139f85371fa9af1af3fc63";
-  let forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lat}&appid=${apiKey}&units=metric`;
-
+  let forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
+  
   axios.get(forecastUrl).then(displayForescast);
-  axios.get(forecastUrl).then(getFahrenheit);
 }
 
+// displays the information about searched city
 function displayWeather(response) {
   document.querySelector(".mainCity").innerHTML = response.data.name;
   document.querySelector(".mainDegrees").innerHTML = Math.round(response.data.main.temp);
@@ -83,10 +100,11 @@ function displayWeather(response) {
 
   mainIconEl.setAttribute("src", `../media/${mainIconElAPI}.png`);
 
-  getForecast(response.data.coord);
-
+  coords = response.data.coord;
+  getForecast(coords, "metric");
 }
 
+//error message if city name is mistyped
 function error() {
   let searchCity = document.querySelector("#city-search").value;
   if (error) {
@@ -95,12 +113,14 @@ Check the spelling of "${searchCity.charAt(0).toUpperCase() + searchCity.slice(1
   }
 }
 
+// search engine output
 function setDefaultCity(searchCity) {
   let apiKey = "39211d1d13139f85371fa9af1af3fc63";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayWeather).catch(error);
 }
 
+// search engine 
 function setCity(event) {
   event.preventDefault();
   let searchCity = document.querySelector("#city-search").value;
@@ -112,11 +132,12 @@ function setCity(event) {
   };
 }
 
+// defines the current location of the user
 function searchCurrentPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiKey = "39211d1d13139f85371fa9af1af3fc63";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`
 
   axios.get(apiUrl).then(displayWeather);
 }
@@ -126,8 +147,10 @@ function revealLocation(event) {
   navigator.geolocation.getCurrentPosition(searchCurrentPosition);
 }
 
+// Temperature unit conversion
 function convertFahrenheit(event) {
   event.preventDefault();
+
   let fahrenheitTemperature = Math.round(initialCelcius * 9 / 5) + 32;
   mainTemperature.innerHTML = fahrenheitTemperature;
 
@@ -135,6 +158,8 @@ function convertFahrenheit(event) {
   celciusSymbol.classList.remove("active");
   fahrenheitSymbol.classList.remove("to-be-chosen");
   celciusSymbol.classList.add("to-be-chosen");
+  
+  getForecast(coords, "imperial");
 }
 
 function convertCelcius(event) {
@@ -145,32 +170,8 @@ function convertCelcius(event) {
   fahrenheitSymbol.classList.remove("active");
   celciusSymbol.classList.remove("to-be-chosen");
   fahrenheitSymbol.classList.add("to-be-chosen");
+
+ getForecast(coords, "metric");
 }
 
-let dateTime = document.querySelector(".dateTime");
-dateTime.innerHTML = setDateTime();
-
-let city = document.querySelector(".search");
-city.addEventListener("submit", setCity);
-
-let locationButton = document.querySelector("#location-button");
-locationButton.addEventListener("click", revealLocation);
-
-let mainTemperature = document.querySelector("span.mainDegrees");
-let fahrenheitSymbol = document.querySelector("#fahrenheit");
-fahrenheitSymbol.addEventListener("click", convertFahrenheit);
-fahrenheitSymbol.addEventListener("click", getFahrenheit);
-
-let celciusSymbol = document.querySelector("#celcius");
-celciusSymbol.addEventListener("click", convertCelcius);
-
-let initialCelcius = null;
-
 setDefaultCity("Kyiv");
-
-
-let initalMax = null;
-let initialMin = null;
-
-let maxTemp = document.querySelector(".tempValueMax");
-console.log(maxTemp);
