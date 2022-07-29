@@ -107,9 +107,9 @@ function displayWeather(response) {
 }
 
 //error message if city name is mistyped
-function error() {
+function error(err) {
   let searchCity = document.querySelector("#city-search").value;
-  if (error) {
+  if (err) {
     alert(`🤖 Wow, seems like evil bots are trying to interfere 🫣
 Check the spelling of "${searchCity.charAt(0).toUpperCase() + searchCity.slice(1)}" and type it one more time`)
   }
@@ -119,6 +119,7 @@ Check the spelling of "${searchCity.charAt(0).toUpperCase() + searchCity.slice(1
 function setDefaultCity(searchCity) {
   let apiKey = "39211d1d13139f85371fa9af1af3fc63";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}&units=${units}`;
+  
   axios.get(apiUrl).then(displayWeather).catch(error);
 }
 
@@ -156,7 +157,8 @@ function convertFahrenheit(event) {
   let fahrenheitTemperature = Math.round(initialCelcius * 9 / 5) + 32;
   mainTemperature.innerHTML = fahrenheitTemperature;
   let windSpeedtoFahr = Math.round(initialWindSpeed * 2.237);
-  windSpeedConversion.innerHTML = `${windSpeedtoFahr} mph`;
+  document.querySelector("#wind").innerHTML = windSpeedtoFahr;
+  windSpeedConversion.innerHTML = ` mph`;
 
   fahrenheitSymbol.classList.add("active");
   celciusSymbol.classList.remove("active");
@@ -169,7 +171,8 @@ function convertFahrenheit(event) {
 function convertCelcius(event) {
   event.preventDefault();
   mainTemperature.innerHTML = initialCelcius;
-  windSpeedConversion.innerHTML = `${initialWindSpeed} m/s`;
+  document.querySelector("#wind").innerHTML = initialWindSpeed;
+  windSpeedConversion.innerHTML = ` m/s`;
 
   celciusSymbol.classList.add("active");
   fahrenheitSymbol.classList.remove("active");
