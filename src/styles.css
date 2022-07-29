@@ -8,17 +8,17 @@ body {
 
 .container {
     text-align: center;
-    margin: 10px auto;
-    padding: 30px;
+    margin: 3px auto;
+    padding: 30px 30px 15px;
     max-width: 600px;
     
     background: #d7aef3;
     color: #fff;
     
     border-radius: 3px;     
-    box-shadow: 8px 8px #891180,
-        16px 16px #6e0c66,
-        24px 24px #460540;
+    box-shadow: 8px 8px 2px #891180,
+        16px 16px 2px #6e0c66,
+        24px 24px 3px #460540;
 }
 
 form.search {
@@ -29,14 +29,14 @@ form.search {
 
 input.search-input {
     border-radius: 5px;
-    box-shadow: 2px 2px #460540;
+    box-shadow: 2px 2px 5px #460540;
 }
 
 .upperBtn {
     background: linear-gradient(68.6deg, rgb(252, 165, 241) 1.8%, rgb(181, 255, 255) 100.5%);
     border: 2px outset #dcb5ff;
     border-radius: 3px;
-    box-shadow: 2px 2px #a13b94;
+    box-shadow: 2px 2px 5px #a13b94;
     color:rgba(70, 5, 64, 0.85);
     font-family: 'Press Start 2P', cursive;
     margin: 5px;
@@ -75,9 +75,6 @@ section h2.degrees {
     text-shadow: #460540 2px 2px;
 }
 
-section span.mainDegrees {
-    font-size: 26px;
-}
 
 section p span.dateTime {
     font-family: 'Josefin Sans', sans-serif;
@@ -92,15 +89,29 @@ section p #description:first-letter {
     text-transform: uppercase;
 }
 
-.mainImage {
+section .mainImage {
     display: block;
     width: 80px;   
 }
 
+section .mainImage:hover {
+    transform: scale(1.2);
+    transition: all 400ms ease-in-out;
+}
+
+@media (max-width: 600px) { 
+    section div.mainTemperature {
+    display: flex;
+    flex-direction: row;
+}
+}
+
+section span.mainDegrees {
+    font-size: 26px;
+}
 section span.temType {
     font-size: 12px;
     cursor: pointer;
-    
 }
 
 h2 .active {
@@ -133,6 +144,25 @@ section.lowerWeather {
     font-family: 'Josefin Sans', sans-serif;
     text-align: center;
     font-size: 16px;
+}
+
+hr {
+    margin: 15px;
+}
+
+section div.forecastCard {
+    padding: 10px;
+}
+
+@media (max-width: 600px) {
+section div.forecastCard {
+        flex: 100%;
+    }
+}
+section div.forecastCard:hover {
+    box-shadow: 2px 2px 5px #b5ffff, 1px -1px 5px #9b3f8f;
+    border-radius: 2px;
+    transition: all 400ms ease-in-out;
 }
 
 section div.forecastWeekDays {

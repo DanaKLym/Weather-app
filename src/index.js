@@ -58,7 +58,7 @@ function displayForescast(response) {
   
   forecastInfo.forEach(function (day, index) {
     if (index < 5) {
-      forecastHTML = forecastHTML + `<div class="col">
+      forecastHTML = forecastHTML + `<div class="col forecastCard">
             <div class="forecastWeekDays">${setForecastDays(day.dt)}</div>
             <div class="forecastImage">
               <img
@@ -89,6 +89,7 @@ function getForecast(coordinates, units) {
 
 // displays the information about searched city
 function displayWeather(response) {
+  console.log(response)
   document.querySelector(".mainCity").innerHTML = response.data.name;
   document.querySelector(".mainDegrees").innerHTML = Math.round(response.data.main.temp);
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
@@ -110,7 +111,7 @@ function displayWeather(response) {
 function error(err) {
   let searchCity = document.querySelector("#city-search").value;
   if (err) {
-    alert(`🤖 Wow, seems like evil bots are trying to interfere 🫣
+    alert(`🤖 Wow, seems like evil bots are trying to interfere
 Check the spelling of "${searchCity.charAt(0).toUpperCase() + searchCity.slice(1)}" and type it one more time`)
   }
 }
