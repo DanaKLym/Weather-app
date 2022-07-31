@@ -1,6 +1,6 @@
 body {
-    background: linear-gradient(324deg, rgba(169, 33, 222, 1) 14%, rgba(255, 218, 27, 1) 63%, rgba(255, 255, 255, 1) 100%);
-    background: url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/038/870/original/backgroundHill.jpg?1656363173");
+    background: linear-gradient(324deg, rgb(169, 33, 222) 14%, rgba(255, 218, 27, 1) 63%, rgba(255, 255, 255, 1) 100%);
+    background-image: url('../media/backgroundHill.jpg');
     background-attachment: fixed;
     background-size: cover;
     
@@ -9,7 +9,7 @@ body {
 .container {
     text-align: center;
     margin: 3px auto;
-    padding: 30px 30px 15px;
+    padding: 1px;
     max-width: 600px;
     
     background: #d7aef3;
@@ -19,6 +19,11 @@ body {
     box-shadow: 8px 8px 2px #891180,
         16px 16px 2px #6e0c66,
         24px 24px 3px #460540;
+}
+
+header {
+    padding: 30px 30px 8px;
+    border-radius: 5px;
 }
 
 form.search {
@@ -38,6 +43,7 @@ input.search-input {
     border-radius: 3px;
     box-shadow: 2px 2px 5px #a13b94;
     color:rgba(70, 5, 64, 0.85);
+    text-shadow: 1px 0 0px #b5ffff, -1px 0 0px #9b3f8f;
     font-family: 'Press Start 2P', cursive;
     margin: 5px;
     padding: 6px 12px;
@@ -56,23 +62,28 @@ input.search-input {
     transition: all 150ms ease-in-out;
 }
 
+header h1.mainCity {
+    margin: 20px 20px 8px;
+
+    text-align: start;
+    text-transform: capitalize;
+    color: #ff2fd2;
+    text-shadow: #460540 2px 2px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 40px;
+}
+
 section.mainWeather {
-    margin: 20px;
+    margin: 0 20px;
+    padding: 0 30px;
     text-align: start;
 }
 
-section h1.mainCity {
-    text-transform: capitalize;
-    color: #ff2fd2;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 40px;
-    text-shadow: #460540 2px 2px;
-}
 
 section h2.degrees {
     font-family: 'Press Start 2P', cursive;
     font-size: 20px;
-    text-shadow: #460540 2px 2px;
+    text-shadow: #460540 2px 2px;   
 }
 
 
@@ -141,13 +152,14 @@ a.to-be-chosen:hover {
 }
 
 section.lowerWeather {
+    padding: 0 30px;
     font-family: 'Josefin Sans', sans-serif;
     text-align: center;
     font-size: 16px;
 }
 
 hr {
-    margin: 15px;
+    margin: 15px 45px;
 }
 
 section div.forecastCard {
@@ -159,6 +171,7 @@ section div.forecastCard {
         flex: 100%;
     }
 }
+
 section div.forecastCard:hover {
     box-shadow: 2px 2px 5px #b5ffff, 1px -1px 5px #9b3f8f;
     border-radius: 2px;
@@ -179,6 +192,10 @@ section div.temperatureDigits {
 
 div span.boldTemperatureDigits {
     font-weight: 700;
+}
+
+footer {
+    padding: 0 30px 15px;
 }
 
 footer, a.githubLink {

@@ -1,4 +1,6 @@
 // Global variables
+let timeOfTheDay = "";
+let shortDescription = "";
 let dateTime = document.querySelector(".dateTime");
 dateTime.innerHTML = setDateTime();
 
@@ -35,7 +37,40 @@ function setDateTime() {
     minutes = `0${minutes}`;
   }
 
+  setTimeOfTheDay(hours);
   return (`${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}, ${hours}:${minutes}`);
+  
+}
+
+// setting time of the day 
+function setTimeOfTheDay (hours) { 
+  if (hours > 12 && hours <= 17) {
+    timeOfTheDay = "day";
+  } else if (hours >= 5 && hours <= 12) {
+    timeOfTheDay = "morning";
+  } else if (hours > 17 && hours <=23) { 
+  timeOfTheDay = "evening";
+  } else {
+    timeOfTheDay = "night";
+  }
+
+  return timeOfTheDay;
+}
+
+// setting background change according to time of the day
+
+function changeBodyBackground(timeOfTheDay) { 
+  let bodyEl = document.querySelector("body")
+  if (timeOfTheDay === "day") {
+    bodyEl.setAttribute(`style`, `background-image: url('../media/backgroundHill.jpg');`);
+  } else if (timeOfTheDay === "morning") {
+    bodyEl.setAttribute(`style`, `background-image: url('../media/backgroundMorning.jpg');`);
+  } else if (timeOfTheDay = "evening") { 
+    bodyEl.setAttribute(`style`, `background-image: url('../media/backgroundEvening.png');`);
+  }
+  else { 
+    bodyEl.setAttribute(`style`, `background-image: url('../media/background.png');`);
+  }
 }
 
 // sets the short form of days on forecast table instead of numerical type
@@ -96,6 +131,8 @@ function displayWeather(response) {
   initialWindSpeed = Math.round(response.data.wind.speed);
   document.querySelector("#wind").innerHTML = initialWindSpeed;
   document.querySelector("#description").innerHTML = response.data.weather[0].description;
+  shortDescription = response.data.weather[0].main;
+  console.log(shortDescription)
 
   initialCelcius = Math.round(response.data.main.temp);
   let mainIconEl = document.querySelector("#mainImageElement");
@@ -105,7 +142,19 @@ function displayWeather(response) {
 
   coords = response.data.coord;
   getForecast(coords, "metric");
+  changeBodyBackground(timeOfTheDay);
+  changeAnimationTop(shortDescription);
 }
+
+//set upper animation layer
+
+function changeAnimationTop(shortDescription) {
+  let animationTop = document.querySelector("header");
+  if (shortDescription) {
+    animationTop.setAttribute(`style`, `background-image: url('../media/${shortDescription}.gif');
+    background-size: cover;`)
+  } 
+ }
 
 //error message if city name is mistyped
 function error(err) {
