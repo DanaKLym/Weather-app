@@ -7,11 +7,8 @@ dateTime.innerHTML = setDateTime();
 let city = document.querySelector(".search");
 city.addEventListener("submit", setCity);
 
-city.addEventListener("submit", convertCelcius); // did this to fix the F button issue;
-
 let locationButton = document.querySelector("#location-button");
 locationButton.addEventListener("click", revealLocation);
-locationButton.addEventListener("click", convertCelcius); // this also showed the same issue, as submit;
 
 let units = "metric";
 let coords = null;
@@ -171,6 +168,12 @@ function setCity(event) {
   event.preventDefault();
   let searchCity = document.querySelector("#city-search").value;
 
+  celciusSymbol.classList.add("active");
+  fahrenheitSymbol.classList.remove("active");
+  celciusSymbol.classList.remove("to-be-chosen");
+  fahrenheitSymbol.classList.add("to-be-chosen");
+  windSpeedConversion.innerHTML = ` m/s`;
+
   if (searchCity.length <= 0) {
     alert(`👾 Oops, looks like aliens are messing up with you, please, type the city name again`);
   } else {
@@ -184,6 +187,12 @@ function searchCurrentPosition(position) {
   let lon = position.coords.longitude;
   let apiKey = "39211d1d13139f85371fa9af1af3fc63";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+
+  celciusSymbol.classList.add("active");
+  fahrenheitSymbol.classList.remove("active");
+  celciusSymbol.classList.remove("to-be-chosen");
+  fahrenheitSymbol.classList.add("to-be-chosen");
+  windSpeedConversion.innerHTML = ` m/s`;
 
   axios.get(apiUrl).then(displayWeather);
 }
