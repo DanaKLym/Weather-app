@@ -7,8 +7,11 @@ dateTime.innerHTML = setDateTime();
 let city = document.querySelector(".search");
 city.addEventListener("submit", setCity);
 
+city.addEventListener("submit", convertCelcius); // did this to fix the F button issue;
+
 let locationButton = document.querySelector("#location-button");
 locationButton.addEventListener("click", revealLocation);
+locationButton.addEventListener("click", convertCelcius); // this also showed the same issue, as submit;
 
 let units = "metric";
 let coords = null;
@@ -16,12 +19,13 @@ let initialCelcius = null;
 let initialWindSpeed = null;
 
 let mainTemperature = document.querySelector("span.mainDegrees");
-let windSpeedConversion = document.querySelector("#wind-conversion")
-let fahrenheitSymbol = document.querySelector("#fahrenheit");
-fahrenheitSymbol.addEventListener("click", convertFahrenheit);
+let windSpeedConversion = document.querySelector("#wind-conversion");
 
 let celciusSymbol = document.querySelector("#celcius");
 celciusSymbol.addEventListener("click", convertCelcius);
+
+let fahrenheitSymbol = document.querySelector("#fahrenheit");
+fahrenheitSymbol.addEventListener("click", convertFahrenheit);
 
 // sets current date and time from the user's device;
 function setDateTime() {
@@ -170,7 +174,7 @@ function setCity(event) {
   if (searchCity.length <= 0) {
     alert(`👾 Oops, looks like aliens are messing up with you, please, type the city name again`);
   } else {
-    setDefaultCity(searchCity)
+    setDefaultCity(searchCity);
   };
 }
 
@@ -179,7 +183,7 @@ function searchCurrentPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiKey = "39211d1d13139f85371fa9af1af3fc63";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
   axios.get(apiUrl).then(displayWeather);
 }
