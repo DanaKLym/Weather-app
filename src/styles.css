@@ -47,6 +47,7 @@ input.search-input {
     margin: 5px;
     padding: 6px 12px;
     font-size: 16px;
+    transition: all 150ms ease-in-out;
 }
 
 .upperBtn:hover {
@@ -58,7 +59,6 @@ input.search-input {
 .upperBtn:active {
     transform: scale(0.9);
     border: 2px outset #d59bf6;
-    transition: all 150ms ease-in-out;
 }
 
 header h1.mainCity {
@@ -102,11 +102,11 @@ section p #description:first-letter {
 section .mainImage {
     display: block;
     width: 80px;   
+    transition: all 400ms ease-in-out;
 }
 
 section .mainImage:hover {
     transform: scale(1.2);
-    transition: all 400ms ease-in-out;
 }
 
 @media (max-width: 600px) { 
@@ -138,12 +138,12 @@ h2 .active:hover {
 a.to-be-chosen {
     text-decoration: none;
     color: #cee7eb;
+    transition: all 200ms ease-in-out;
 }
 
 a.to-be-chosen:hover {
     color: #c0ebfc;
     font-size: 16px;
-    transition: all 200ms ease-in-out;
 }
 
 section span.humidity, section span.wind {
@@ -163,18 +163,18 @@ hr {
 
 section div.forecastCard {
     padding: 10px;
+    transition: all 400ms ease-in-out;
 }
 
 @media (max-width: 600px) {
 section div.forecastCard {
-        flex: 100%;
+    flex: 100%;
     }
 }
 
 section div.forecastCard:hover {
     box-shadow: 2px 2px 5px #b5ffff, 1px -1px 5px #9b3f8f;
     border-radius: 2px;
-    transition: all 400ms ease-in-out;
 }
 
 section div.forecastWeekDays {
